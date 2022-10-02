@@ -42,6 +42,8 @@ INSTALLED_APPS = [
     # These are new created added by users
     'fpages',
     'ad_board',
+    'ckeditor', #редактор с возможностью добавлять картинки
+    'ckeditor_uploader',
 
     # these are new added by users
     'django.contrib.sites',
@@ -141,3 +143,9 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 STATICFILES_DIRS = [
     BASE_DIR / "static"
 ]
+
+STATIC_ROOT = "my_static/static/" # так делать не стоит, нужно разобраться подробнее
+
+CKEDITOR_BASEPATH = "my_static/ckeditor/ckeditor/"
+
+CKEDITOR_UPLOAD_PATH = "uploads/"

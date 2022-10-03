@@ -42,8 +42,9 @@ INSTALLED_APPS = [
     # These are new created added by users
     'fpages',
     'ad_board',
-    'ckeditor', #редактор с возможностью добавлять картинки
+    'ckeditor',         #редактор с возможностью добавлять картинки
     'ckeditor_uploader',
+    'django.forms',
 
     # these are new added by users
     'django.contrib.sites',
@@ -133,7 +134,7 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.1/howto/static-files/
 
-STATIC_URL = 'static/'
+STATIC_URL = '/static/'
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
@@ -144,8 +145,40 @@ STATICFILES_DIRS = [
     BASE_DIR / "static"
 ]
 
-STATIC_ROOT = "my_static/static/" # так делать не стоит, нужно разобраться подробнее
+# STATIC_ROOT = "my_static/static/" # так делать не стоит, нужно разобраться подробнее
 
-CKEDITOR_BASEPATH = "my_static/ckeditor/ckeditor/"
+# CKEDITOR_BASEPATH = "static/ckeditor/ckeditor/"
+
+
+MEDIA_URL = 'media/'
+MEDIA_ROOT = BASE_DIR / 'media'
+
+
 
 CKEDITOR_UPLOAD_PATH = "uploads/"
+
+CKEDITOR_CONFIGS = {
+    'default': {
+        'toolbar': 'CMS',
+        'width': '100%',
+        'toolbar_CMS': [
+            ['Format', 'Styles', 'FontSize'],
+            ['Bold', 'Italic', 'Underline', 'Strike', 'Subscript', 'Superscript'],
+            ['TextColor', 'BGColor'],
+            ['Link', 'Unlink'],
+            ['JustifyLeft', 'JustifyCenter', 'JustifyRight', 'JustifyBlock'],
+            ['Undo', 'Redo'],
+            ['Copy', 'Paste', 'PasteText', 'PasteFromWord'],
+            ['SelectAll', 'Find', 'Replace'],
+            ['NumberedList', 'BulletedList'],
+            ['Outdent', 'Indent'],
+            ['Smiley', 'SpecialChar', 'Blockquote', 'HorizontalRule'],
+            ['Table', 'Image', 'Youtube'],
+            ['ShowBlocks', 'Source', 'About']
+
+        ],
+        'extraPlugins': 'youtube',
+        'extraAllowedContent': 'iframe[*]',
+        'allowedContent': True,
+    },
+}

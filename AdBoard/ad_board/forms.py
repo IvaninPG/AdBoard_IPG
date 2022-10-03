@@ -1,30 +1,22 @@
+from ckeditor_uploader.fields import RichTextUploadingFormField
 from django import forms
 from django.contrib.auth.models import User
 from django.core.exceptions import ValidationError
+from django.contrib import admin
 
 from .models import Ad
 
 
 class AdForm(forms.ModelForm):
-   text = forms.TextInput()
 
-   class Meta:
-       model = Post
-       fields = [
-           'author',
-           'adsCategory',
-           'title',
-           'text',
-       ]
+    content = RichTextUploadingFormField(config_name='default')
 
-   def clean(self):
-       cleaned_data = super().clean()
-       text = cleaned_data.get("text")
-       title = cleaned_data.get("title")
+    class Meta:
+        model = Ad
+        fields = [
+            'author',
+            'adsCategory',
+            'title',
+            'content',
+             ]
 
-       if title == text:
-           raise ValidationError(
-               "Текст не должен быть идентичен заголовку."
-           )
-
-       return cleaned_data\

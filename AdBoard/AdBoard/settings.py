@@ -157,25 +157,40 @@ MEDIA_ROOT = BASE_DIR / 'media'
 
 CKEDITOR_UPLOAD_PATH = "uploads/"
 
+# CKEDITOR_CONFIGS = {
+#     'default': {
+#         'toolbar': 'Custom',
+#         'toolbar_Custom': [
+#             ['Bold', 'Italic', 'Underline'],
+#             ['NumberedList', 'BulletedList', '-', 'Outdent', 'Indent', '-', 'JustifyLeft', 'JustifyCenter', 'JustifyRight', 'JustifyBlock'],
+#             ['Link', 'Unlink'],
+#             ['RemoveFormat', 'Source']
+#         ]
+#     }
+# }
+
+
 CKEDITOR_CONFIGS = {
     'default': {
         'toolbar': 'CMS',
         'width': '100%',
         'toolbar_CMS': [
-            ['Format', 'Styles', 'FontSize'],
-            ['Bold', 'Italic', 'Underline', 'Strike', 'Subscript', 'Superscript'],
-            ['TextColor', 'BGColor'],
-            ['Link', 'Unlink'],
-            ['JustifyLeft', 'JustifyCenter', 'JustifyRight', 'JustifyBlock'],
             ['Undo', 'Redo'],
             ['Copy', 'Paste', 'PasteText', 'PasteFromWord'],
-            ['SelectAll', 'Find', 'Replace'],
+            '/',
+            ['Bold', 'Italic', 'Underline', 'Strike', 'Subscript', 'Superscript'],
+            ['Format', 'Styles', 'FontSize'],
+            ['TextColor', 'BGColor'],
+            ['JustifyLeft', 'JustifyCenter', 'JustifyRight', 'JustifyBlock'],
+            '/',
             ['NumberedList', 'BulletedList'],
             ['Outdent', 'Indent'],
-            ['Smiley', 'SpecialChar', 'Blockquote', 'HorizontalRule'],
+            ['Smiley', 'SpecialChar', 'HorizontalRule'],
+            ['SelectAll', 'Find', 'Replace'],
+            '/',
+            ['Link', 'Unlink'],
             ['Table', 'Image', 'Youtube'],
-            ['ShowBlocks', 'Source', 'About']
-
+            ['ShowBlocks', 'Source']
         ],
         'extraPlugins': 'youtube',
         'extraAllowedContent': 'iframe[*]',

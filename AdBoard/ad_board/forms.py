@@ -20,3 +20,13 @@ class AdForm(forms.ModelForm):
             'content',
              ]
 
+# class ResponseForm(forms.ModelForm):
+#
+#     class Meta:
+#         model = Ad
+#         fields = [
+#             'authorName',
+#             'text',
+#             'email',
+#
+#              ]

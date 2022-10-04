@@ -1,0 +1,37 @@
+
+
+{% extends 'flatpages/default.html' %}
+
+{% block title %}
+Ads
+{% endblock title %}
+
+{% block content %}
+   <h1>Все Объявления </h1>
+   <a href="create/">  Создать новость  </a>
+   <hr>
+   {% if ad_list %}
+       <table align="center" cellpadding="5" bordercolor="silver" rules="cols"  border="2" width="100%">
+           <tr >
+               <td>Заголовок</td>
+               <td>Категория</td>
+               <td>Дата публикации</td>
+               <td>Релиз</td>
+           </tr>
+
+           {% for ad in ad_list %}
+           <tr>
+               <td>
+                   <a href="{{ad.id}}">{{ ad.title }}</a>
+               </td>
+               <td>{{ ad.adsCategory }}</td>
+               <td>{{ ad.dateCreation|date:'D d M Y' }}</td>
+               <td>{{ ad.content|truncatewords:10|safe }}</td>
+           </tr>
+           {% endfor %}
+
+       </table>
+   {% else %}
+       <h2>Новостей нет!</h2>
+   {% endif %}
+{% endblock content %}

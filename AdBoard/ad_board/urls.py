@@ -2,7 +2,7 @@ from django.urls import path, include
 
 # Импортируем созданное нами представление
 
-from .views import AdsList, AdDetail, AdCreate
+from .views import AdsList, AdDetail, AdCreate, AdUpdate, AdDelete
 
 urlpatterns = [
 
@@ -14,7 +14,9 @@ urlpatterns = [
     # Для этого вызываем метод as_view.
 
     path('', AdsList.as_view()),
-    path('<int:pk>', AdDetail.as_view(), name='ad_detail'),
+    path('<int:pk>/', AdDetail.as_view(), name='ad_detail'),
     path('create/', AdCreate.as_view(), name='ad_create'),
+    path('<int:pk>/update/', AdUpdate.as_view(), name='ad_update'),
+    path('<int:pk>/delete/', AdDelete.as_view(), name='ad_delete')
 
 ]

@@ -14,6 +14,8 @@ from pathlib import Path
 import os
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
+from dotenv import load_dotenv
+
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 
@@ -45,13 +47,21 @@ INSTALLED_APPS = [
     'ckeditor',         #редактор с возможностью добавлять картинки
     'ckeditor_uploader',
     'django.forms',
+    'protect',
+    'sign',
 
     # these are new added by users
     'django.contrib.sites',
     'django.contrib.flatpages', # добавили статическую страничку
+    'allauth',
+    'allauth.account',
+    'allauth.socialaccount',
+    # ... include the providers you want to enable:
+    'allauth.socialaccount.providers.google',
 
 
 ]
+
 
 SITE_ID = 1
 
@@ -81,10 +91,23 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'django.template.context_processors.request',
             ],
         },
     },
 ]
+
+
+AUTHENTICATION_BACKENDS = [
+            'django.contrib.auth.backends.ModelBackend',
+            'allauth.account.auth_backends.AuthenticationBackend',
+        ]
+
+LOGIN_URL = '/accounts/login/'
+
+# LOGIN_URL = 'sign/login/'
+LOGIN_REDIRECT_URL = '/'
+LOGOUT_REDIRECT_URL = '/'
 
 WSGI_APPLICATION = 'AdBoard.wsgi.application'
 
@@ -109,6 +132,9 @@ AUTH_PASSWORD_VALIDATORS = [
     },
     {
         'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator',
+        'OPTIONS': {
+            'min_length': 3,
+        }
     },
     {
         'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator',
@@ -197,3 +223,20 @@ CKEDITOR_CONFIGS = {
         'allowedContent': True,
     },
 }
+
+ACCOUNT_EMAIL_REQUIRED = True
+ACCOUNT_UNIQUE_EMAIL = True
+ACCOUNT_USERNAME_REQUIRED = False
+ACCOUNT_AUTHENTICATION_METHOD = 'username_email'
+ACCOUNT_EMAIL_VERIFICATION = 'mandatory'
+
+ACCOUNT_FORMS = {'signup': 'sign.forms.BasicSignupForm'}
+
+EMAIL_HOST = 'smtp.yandex.ru'  # адрес сервера Яндекс-почты для всех один и тот же
+EMAIL_PORT = 465  # порт smtp сервера тоже одинаковый
+EMAIL_USE_SSL = True  # Яндекс использует ssl
+load_dotenv(dotenv_path='.env/yandex.env')
+EMAIL_HOST_USER = os.getenv('EMAIL_HOST_USER')
+EMAIL_HOST_PASSWORD = os.getenv('EMAIL_HOST_PASSWORD')
+DEFAULT_FROM_EMAIL = os.getenv('DEFAULT_FROM_EMAIL')
+REDIS_URL_IPG = os.getenv('REDIS_URL_IPG')

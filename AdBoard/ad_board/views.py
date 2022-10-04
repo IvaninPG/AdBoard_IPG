@@ -1,3 +1,4 @@
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import render
 from django.views.generic import ListView, DetailView, CreateView, DeleteView, UpdateView
 from .models import Ad
@@ -21,7 +22,7 @@ class AdsList(ListView):
     paginate_by = 10
 
 
-class AdCreate(CreateView):
+class AdCreate(LoginRequiredMixin, CreateView):
         # Указываем нашу разработанную форму
     form_class = AdForm
         # модель постов
@@ -42,7 +43,7 @@ class AdCreate(CreateView):
         return super().form_valid(form)
 
 
-class AdUpdate(UpdateView):
+class AdUpdate(LoginRequiredMixin, UpdateView):
 
     form_class = AdForm
     model = Ad
@@ -50,7 +51,7 @@ class AdUpdate(UpdateView):
     success_url = '../'
 
 
-class AdDelete(DeleteView):
+class AdDelete(LoginRequiredMixin, DeleteView):
 
     model = Ad
     template_name = 'ad_delete.html'

@@ -24,7 +24,9 @@ class Ad(models.Model):
 
 class Response(models.Model):
     adRespons = models.ForeignKey(Ad, on_delete=models.CASCADE)
-    authorName = models.CharField(max_length=64, unique=True)
+    authorName = models.CharField(max_length=64, unique=False)
     text = models.TextField()  # поле основной статьи
     email = models.EmailField(max_length=64, help_text="Обязательно для заполнения")
 
+    def __str__(self):
+        return self.authorName

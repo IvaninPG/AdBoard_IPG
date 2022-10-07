@@ -1,0 +1,47 @@
+
+
+{% extends 'flatpages/default.html' %}
+
+{% block title %}
+Ads
+{% endblock title %}
+
+{% block content %}
+   <h1>Отклики на Ваши объявления </h1>
+   <a href="..">Назад</a>
+   <hr>
+   {% if response_list %}
+       <table align="center" cellpadding="5" bordercolor="silver" rules="cols"  border="2" width="100%">
+           <tr >
+               <td>Объявление</td>
+               <td>Автор отклика</td>
+               <td>Текст отклик</td>
+           </tr>
+
+           {% for response in response_list %}
+           <tr>
+               <td>
+                   <a href="../{{ response.adRespons.id }}">{{ response.adRespons }}</a>
+               </td>
+               <td>{{ response.authorName }}</td>
+               <td>{{ response.text }}</td>
+               <td>
+                    <form action="" method="post">
+                    {% csrf_token %}
+                    <input type="submit" value="Принять" />
+                    </form>
+                </td>
+                <td>
+                    <form action="" method="post">
+                    {% csrf_token %}
+                    <input type="submit" value="Удалить" />
+                    </form>
+                </td>
+           </tr>
+           {% endfor %}
+
+       </table>
+   {% else %}
+       <h2>Откликов нет!</h2>
+   {% endif %}
+{% endblock content %}

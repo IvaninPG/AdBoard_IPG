@@ -4,7 +4,7 @@ from django.contrib.auth.models import User
 from django.core.exceptions import ValidationError
 from django.contrib import admin
 
-from .models import Ad
+from .models import Ad, Response
 
 
 class AdForm(forms.ModelForm):
@@ -20,13 +20,13 @@ class AdForm(forms.ModelForm):
             'content',
              ]
 
-# class ResponseForm(forms.ModelForm):
-#
-#     class Meta:
-#         model = Ad
-#         fields = [
-#             'authorName',
-#             'text',
-#             'email',
-#
-#              ]
+class ResponseForm(forms.ModelForm):
+
+    class Meta:
+        model = Response
+        fields = [
+            'authorName',
+            'text',
+            'email',
+
+             ]

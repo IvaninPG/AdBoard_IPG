@@ -2,7 +2,7 @@ from django.urls import path, include
 
 # Импортируем созданное нами представление
 
-from .views import AdsList, AdDetail, AdCreate, AdUpdate, AdDelete
+from .views import AdsList, AdDetail, AdCreate, AdUpdate, AdDelete, ResponseCreate, ResponseList
 
 urlpatterns = [
 
@@ -17,6 +17,8 @@ urlpatterns = [
     path('<int:pk>/', AdDetail.as_view(), name='ad_detail'),
     path('create/', AdCreate.as_view(), name='ad_create'),
     path('<int:pk>/update/', AdUpdate.as_view(), name='ad_update'),
-    path('<int:pk>/delete/', AdDelete.as_view(), name='ad_delete')
+    path('<int:pk>/delete/', AdDelete.as_view(), name='ad_delete'),
+    path('<int:pk>/responsecreate/', ResponseCreate.as_view(), name='response_create'),
+    path('responselist/', ResponseList.as_view(), name='response_list'),
 
 ]
